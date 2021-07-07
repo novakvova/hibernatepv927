@@ -1,5 +1,8 @@
 package program;
 
+import models.Author;
+import models.Book;
+import models.Role;
 import models.User;
 import org.hibernate.Session;
 import utils.HibernateSessionFactoryUtil;
@@ -9,10 +12,11 @@ public class Main {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        //Add new User object
-        User user = new User();
-        user.setName("ivan");
+        Role role = new Role("admin");
+        session.save(role);
 
+        User user = new User("Славік");
+        user.getRoles().add(role);
         //Save the employee in database
         session.save(user);
 

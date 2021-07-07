@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="tbl_users")
@@ -12,11 +14,29 @@ public class User {
     @Column(name="name", nullable = false, length = 250)
     private String name;
 
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name="tblUserRoles",
+            joinColumns = {@JoinColumn(name="userId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name="roleId", referencedColumnName = "id")}
+    )
+    private List<Role> roles;
+
     public User() {
+        roles = new ArrayList<>();
     }
 
     public User(String name) {
         this.name = name;
+        roles = new ArrayList<>();
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public int getId() {
