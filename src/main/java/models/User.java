@@ -23,12 +23,12 @@ public class User {
     private List<Role> roles;
 
     public User() {
-        roles = new ArrayList<>();
+        roles = new ArrayList<Role>();
     }
 
     public User(String name) {
         this.name = name;
-        roles = new ArrayList<>();
+        roles = new ArrayList<Role>();
     }
 
     public List<Role> getRoles() {
